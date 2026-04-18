@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMA COLLECTIVE – Fé. Rua. Propósito.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --off-white: #e8e0d0;
+    --beige: #c8b89a;
+    --concrete: #3a3530;
+    --concrete-light: #5a524a;
+    --wine: #7a1e2e;
+    --wine-light: #a02840;
+    --gray: #8a8078;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,184,154,0.15);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo span { color: var(--wine-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--beige);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--wine);
+    color: var(--white) !important;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    font-size: 0.75rem !important;
+  }
+  .nav-cta:hover { background: var(--wine-light); color: var(--white) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); display: block; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 6rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg, rgba(200,184,154,0.03) 0px, rgba(200,184,154,0.03) 1px, transparent 1px, transparent 80px),
+      repeating-linear-gradient(0deg, rgba(200,184,154,0.03) 0px, rgba(200,184,154,0.03) 1px, transparent 1px, transparent 80px);
+  }
+  .hero-court {
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 400px;
+    border: 2px solid rgba(122,30,46,0.3);
+    border-bottom: none;
+    border-radius: 400px 400px 0 0;
+    opacity: 0.4;
+  }
+  .hero-court::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 100px;
+    border: 2px solid rgba(122,30,46,0.4);
+    border-bottom: none;
+    border-radius: 200px 200px 0 0;
+  }
+  .hero-line {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: rgba(122,30,46,0.25);
+  }
+  .hero-number {
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28vw;
+    color: rgba(255,255,255,0.02);
+    right: -2vw; top: -4vw;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine-light);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 14vw, 13rem);
+    line-height: 0.88;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    max-width: 900px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--wine-light);
+    display: block;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--beige);
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--wine);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--wine-light); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 1px solid rgba(200,184,154,0.4);
+    color: var(--beige);
+    padding: 1rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--white); color: var(--white); }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; right: 3rem;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--concrete-light); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .scroll-hint::after {
+    content: ''; width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--concrete-light), transparent);
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--wine);
+    padding: 0.7rem 0;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex; gap: 3rem;
+    animation: marquee 20s linear infinite;
+    will-change: transform;
+  }
+  .marquee-track span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    color: rgba(245,240,232,0.9);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .marquee-dot { color: rgba(245,240,232,0.4); }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTIONS */
+  section { padding: 7rem 3rem; }
+  .section-label {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--wine-light); font-weight: 700; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: ''; display: inline-block; width: 30px; height: 1px;
+    background: var(--wine-light);
+  }
+
+  /* QUEM SOMOS */
+  .quem-somos { background: var(--black); position: relative; }
+  .quem-somos-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center; max-width: 1200px; margin: 0 auto;
+  }
+  .qs-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    line-height: 0.92; letter-spacing: 0.03em;
+    color: var(--white); margin-bottom: 2rem;
+  }
+  .qs-title em { font-style: normal; color: var(--wine-light); display: block; }
+  .qs-text { color: var(--beige); line-height: 1.8; font-size: 0.95rem; font-weight: 300; margin-bottom: 1.5rem; }
+  .qs-visual {
+    position: relative;
+    background: var(--concrete);
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .qs-visual-bg {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(-45deg, rgba(122,30,46,0.06) 0, rgba(122,30,46,0.06) 1px, transparent 1px, transparent 12px);
+  }
+  .qs-visual-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 9rem; color: rgba(245,240,232,0.05);
+    line-height: 1; text-align: center; user-select: none;
+  }
+  .qs-badge {
+    position: absolute; bottom: 2rem; right: 2rem;
+    background: var(--wine); padding: 1rem 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem; letter-spacing: 0.1em; color: var(--white);
+  }
+  .qs-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+  .stat { border-left: 2px solid var(--wine); padding-left: 1rem; }
+  .stat-n { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--white); letter-spacing: 0.05em; }
+  .stat-l { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.2rem; }
+
+  /* PROPOSITO */
+  .proposito {
+    background: var(--concrete);
+    position: relative; overflow: hidden;
+  }
+  .proposito::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(245,240,232,0.02) 0px, rgba(245,240,232,0.02) 1px, transparent 1px, transparent 60px);
+  }
+  .proposito-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+  .proposito-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 4rem; }
+  .prop-card {
+    background: rgba(10,10,10,0.6);
+    padding: 3rem 2rem;
+    border-top: 2px solid var(--wine);
+    transition: background 0.3s;
+  }
+  .prop-card:hover { background: rgba(10,10,10,0.9); }
+  .prop-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem; color: rgba(122,30,46,0.3);
+    line-height: 1; margin-bottom: 1.5rem; letter-spacing: 0.05em;
+  }
+  .prop-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; letter-spacing: 0.08em;
+    color: var(--white); margin-bottom: 1rem;
+  }
+  .prop-text { color: var(--beige); font-size: 0.9rem; line-height: 1.7; font-weight: 300; }
+  .proposito-verse {
+    text-align: center; margin-top: 5rem;
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    color: var(--white); line-height: 1.4;
+    max-width: 700px; margin-left: auto; margin-right: auto; margin-top: 5rem;
+  }
+  .proposito-verse span { color: var(--wine-light); }
+
+  /* COLEÇÃO */
+  .colecao { background: var(--black); }
+  .colecao-inner { max-width: 1200px; margin: 0 auto; }
+  .colecao-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+  .colecao-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 0.92; letter-spacing: 0.03em; color: var(--white);
+  }
+  .colecao-title em { font-style: normal; color: var(--wine-light); }
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .product-card {
+    background: var(--concrete);
+    overflow: hidden; cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+  }
+  .product-card:hover { transform: translateY(-6px); z-index: 2; }
+  .product-card:hover .product-overlay { opacity: 1; }
+  .product-img {
+    aspect-ratio: 3/4;
+    background: var(--concrete);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .product-img-bg {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(-60deg, rgba(122,30,46,0.04) 0, rgba(122,30,46,0.04) 1px, transparent 1px, transparent 20px);
+  }
+  .product-img-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem; color: rgba(245,240,232,0.06);
+    line-height: 1; user-select: none;
+  }
+  .product-overlay {
+    position: absolute; inset: 0;
+    background: rgba(122,30,46,0.8);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .product-overlay span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: 0.15em; color: var(--white);
+    border: 1px solid rgba(245,240,232,0.5);
+    padding: 0.7rem 1.5rem;
+  }
+  .product-info { padding: 1.5rem; background: rgba(0,0,0,0.4); }
+  .product-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; letter-spacing: 0.08em; color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .product-meta { display: flex; justify-content: space-between; align-items: center; }
+  .product-price { font-size: 1rem; color: var(--wine-light); font-weight: 700; }
+  .product-sizes { display: flex; gap: 0.5rem; }
+  .size-tag {
+    font-size: 0.65rem; color: var(--gray); border: 1px solid rgba(138,128,120,0.3);
+    padding: 2px 6px; text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .colecao-badge {
+    display: inline-block;
+    background: var(--wine);
+    color: var(--white);
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 4px 10px; font-weight: 700; margin-bottom: 0.5rem;
+  }
+
+  /* LIFESTYLE */
+  .lifestyle { background: var(--concrete); overflow: hidden; }
+  .lifestyle-inner { max-width: 1200px; margin: 0 auto; }
+  .lifestyle-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 2px; margin-top: 4rem; }
+  .ls-item {
+    background: var(--black);
+    overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ls-item:first-child { grid-row: span 2; }
+  .ls-item-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .ls-label {
+    position: absolute; bottom: 1.5rem; left: 1.5rem;
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--beige); background: rgba(10,10,10,0.7);
+    padding: 6px 12px; font-weight: 500;
+  }
+  .ls-big-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10rem; color: rgba(245,240,232,0.04);
+    line-height: 1; user-select: none; text-align: center;
+  }
+  .ls-court-lines {
+    position: absolute; inset: 0;
+    border: 3px solid rgba(122,30,46,0.15);
+    margin: 20%;
+    border-radius: 50%;
+  }
+
+  /* SOCIAL */
+  .social-section { background: var(--black); text-align: center; }
+  .social-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.5rem;
+  }
+  .social-sub { color: var(--beige); font-size: 0.9rem; margin-bottom: 3rem; font-weight: 300; }
+  .social-icons { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+  .social-link {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    text-decoration: none; color: var(--beige);
+    transition: color 0.2s, transform 0.2s;
+    width: 120px;
+  }
+  .social-link:hover { color: var(--white); transform: translateY(-4px); }
+  .social-icon {
+    width: 64px; height: 64px;
+    border: 1px solid rgba(200,184,154,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .social-link:hover .social-icon { border-color: var(--wine-light); background: rgba(122,30,46,0.2); }
+  .social-name { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    background: var(--concrete);
+    padding: 5rem 3rem 2rem;
+    border-top: 1px solid rgba(200,184,154,0.1);
+  }
+  .footer-inner {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem; max-width: 1200px; margin: 0 auto 4rem;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem; letter-spacing: 0.12em; color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .footer-logo span { color: var(--wine-light); }
+  .footer-tagline { font-size: 0.85rem; color: var(--beige); line-height: 1.7; font-weight: 300; max-width: 260px; }
+  .footer-col h4 {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--white); font-weight: 700; margin-bottom: 1.5rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-col a {
+    color: var(--beige); text-decoration: none; font-size: 0.85rem;
+    font-weight: 300; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom {
+    border-top: 1px solid rgba(200,184,154,0.1);
+    padding-top: 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.05em; }
+  .footer-verse {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 0.9rem; color: var(--wine-light);
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 0 1.5rem 5rem; }
+    .hero-title { font-size: clamp(4rem, 18vw, 6rem); }
+
+    .quem-somos-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .qs-visual { aspect-ratio: 3/2; }
+
+    .proposito-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    .lifestyle-grid { grid-template-columns: 1fr 1fr; }
+    .ls-item:first-child { grid-row: auto; grid-column: span 2; }
+
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .colecao-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+
+  @media (max-width: 600px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .lifestyle-grid { grid-template-columns: 1fr; }
+    .ls-item:first-child { grid-column: auto; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .quem-somos-inner .qs-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SOMA<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#quem-somos">A Marca</a></li>
+    <li><a href="#colecao">Coleção</a></li>
+    <li><a href="#proposito">Propósito</a></li>
+    <li><a href="#lifestyle">Lifestyle</a></li>
+    <li><a href="#colecao" class="nav-cta">Comprar</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-court"></div>
+  <div class="hero-line"></div>
+  <div class="hero-number">7</div>
+
+  <div style="position:relative; z-index:2;">
+    <p class="hero-tag">Guarulhos · São Paulo · 2024</p>
+    <h1 class="hero-title">
+      SOMA
+      <em>COLLECTIVE</em>
+    </h1>
+    <p class="hero-sub">
+      Fé que veste. Rua que inspira. Propósito que une.<br>
+      Streetwear para a nova geração cristã.
+    </p>
+    <div class="hero-actions">
+      <a href="#colecao" class="btn-primary">Ver Coleção</a>
+      <a href="#proposito" class="btn-secondary">Nosso Propósito</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <span>Fé nas Ruas</span><span class="marquee-dot">✦</span>
+    <span>Guarulhos</span><span class="marquee-dot">✦</span>
+    <span>Basquete de Rua</span><span class="marquee-dot">✦</span>
+    <span>Nova Geração</span><span class="marquee-dot">✦</span>
+    <span>Coletividade</span><span class="marquee-dot">✦</span>
+    <span>Jesus na Rua</span><span class="marquee-dot">✦</span>
+    <span>Propósito</span><span class="marquee-dot">✦</span>
+    <span>Movimento</span><span class="marquee-dot">✦</span>
+    <span>Fé nas Ruas</span><span class="marquee-dot">✦</span>
+    <span>Guarulhos</span><span class="marquee-dot">✦</span>
+    <span>Basquete de Rua</span><span class="marquee-dot">✦</span>
+    <span>Nova Geração</span><span class="marquee-dot">✦</span>
+    <span>Coletividade</span><span class="marquee-dot">✦</span>
+    <span>Jesus na Rua</span><span class="marquee-dot">✦</span>
+    <span>Propósito</span><span class="marquee-dot">✦</span>
+    <span>Movimento</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- QUEM SOMOS -->
+<section class="quem-somos" id="quem-somos">
+  <div class="quem-somos-inner">
+    <div class="fade-up">
+      <div class="section-label">A Marca</div>
+      <h2 class="qs-title">
+        NASCIDA
+        <em>NAS RUAS</em>
+        DE GRU
+      </h2>
+      <p class="qs-text">
+        A SOMA COLLECTIVE nasceu nas quadras e becos de Guarulhos — um coletivo de jovens que encontrou na fé o combustível para mudar a rua. Mais do que uma marca de roupas, somos um movimento.
+      </p>
+      <p class="qs-text">
+        Cada peça carrega uma mensagem: a de que pertencimento, estilo e propósito caminham juntos. A rua é o nosso templo, o basquete é a nossa linguagem, e Jesus é o nosso fundamento.
+      </p>
+      <div class="qs-stats">
+        <div class="stat">
+          <div class="stat-n">GRU</div>
+          <div class="stat-l">Origem Guarulhos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">100%</div>
+          <div class="stat-l">Identidade Própria</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">1 FÉ</div>
+          <div class="stat-l">Fundamento</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">+RUA</div>
+          <div class="stat-l">Cultura Urbana</div>
+        </div>
+      </div>
+    </div>
+    <div class="qs-visual fade-up">
+      <div class="qs-visual-bg"></div>
+      <div class="qs-visual-text">
+        SOMA<br>COL<br>LEC<br>TIVE
+      </div>
+      <div class="qs-badge">EST. GRU — SP</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPOSITO -->
+<section class="proposito" id="proposito">
+  <div class="proposito-inner">
+    <div class="section-label">Nosso Propósito</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,6vw,6rem); color:var(--white); letter-spacing:0.03em; line-height:0.92; max-width:700px;" class="fade-up">
+      FÉ, RUA<br>E <span style="color:var(--wine-light);">PROPÓSITO</span>
+    </h2>
+    <div class="proposito-grid fade-up">
+      <div class="prop-card">
+        <div class="prop-num">01</div>
+        <div class="prop-title">FÉ NAS RUAS</div>
+        <p class="prop-text">Jesus não ficou no templo. Ele foi às ruas, às praças, às margens. A SOMA Collective carrega essa mesma missão: levar a mensagem onde a juventude está.</p>
+      </div>
+      <div class="prop-card">
+        <div class="prop-num">02</div>
+        <div class="prop-title">COLETIVIDADE</div>
+        <p class="prop-text">SOMA não é um. SOMA é muitos. Cada jovem que veste a marca faz parte de um coletivo maior — uma geração que se une pelo propósito e pela fé.</p>
+      </div>
+      <div class="prop-card">
+        <div class="prop-num">03</div>
+        <div class="prop-title">NOVA GERAÇÃO</div>
+        <p class="prop-text">Uma geração que não precisa escolher entre ser cristã e ser da rua. Que ora e dribla. Que evangeliza e estiliza. Que representa Cristo onde outros têm medo de ir.</p>
+      </div>
+    </div>
+    <div class="proposito-verse fade-up">
+      "Como são <span>belos os pés</span> dos que anunciam<br>o evangelho da <span>paz</span>."
+      <div style="font-family:'DM Sans',sans-serif; font-size:0.75rem; color:var(--gray); margin-top:0.75rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:500;">Romanos 10:15</div>
+    </div>
+  </div>
+</section>
+
+<!-- COLEÇÃO -->
+<section class="colecao" id="colecao">
+  <div class="colecao-inner">
+    <div class="colecao-header fade-up">
+      <div>
+        <div class="section-label">Produtos</div>
+        <h2 class="colecao-title">NOVA<br><em>COLEÇÃO</em></h2>
+      </div>
+      <a href="#" class="btn-secondary" style="align-self:flex-end;">Ver Tudo</a>
+    </div>
+
+    <div class="products-grid fade-up">
+
+      <!-- Produto 1 -->
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg"></div>
+          <!-- Placeholder visual de camiseta -->
+          <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;opacity:0.5;">
+            <path d="M40 20 L10 50 L30 60 L30 140 L110 140 L110 60 L130 50 L100 20 L80 30 Q70 40 60 30 Z" stroke="#c8b89a" stroke-width="1.5" fill="rgba(200,184,154,0.05)"/>
+            <text x="70" y="95" font-family="Bebas Neue" font-size="28" fill="rgba(200,184,154,0.3)" text-anchor="middle">SOMA</text>
+            <text x="70" y="120" font-family="Bebas Neue" font-size="12" fill="rgba(122,30,46,0.5)" text-anchor="middle">7</text>
+          </svg>
+          <div class="product-overlay"><span>VER PRODUTO</span></div>
+        </div>
+        <div class="product-info">
+          <div class="colecao-badge">Lançamento</div>
+          <div class="product-name">Camiseta SOMA Origin</div>
+          <div class="product-meta">
+            <span class="product-price">R$ 149,90</span>
+            <div class="product-sizes">
+              <span class="size-tag">P</span><span class="size-tag">M</span>
+              <span class="size-tag">G</span><span class="size-tag">GG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produto 2 -->
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg"></div>
+          <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;opacity:0.5;">
+            <path d="M40 20 L10 50 L30 60 L30 140 L110 140 L110 60 L130 50 L100 20 L80 30 Q70 40 60 30 Z" stroke="#7a1e2e" stroke-width="1.5" fill="rgba(122,30,46,0.08)"/>
+            <text x="70" y="90" font-family="Bebas Neue" font-size="14" fill="rgba(200,184,154,0.4)" text-anchor="middle">COLLECTIVE</text>
+            <text x="70" y="115" font-family="Bebas Neue" font-size="32" fill="rgba(122,30,46,0.4)" text-anchor="middle">23</text>
+          </svg>
+          <div class="product-overlay"><span>VER PRODUTO</span></div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Camiseta GRU Nº23</div>
+          <div class="product-meta">
+            <span class="product-price">R$ 159,90</span>
+            <div class="product-sizes">
+              <span class="size-tag">P</span><span class="size-tag">M</span>
+              <span class="size-tag">G</span><span class="size-tag">GG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produto 3 -->
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg"></div>
+          <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;opacity:0.5;">
+            <path d="M40 20 L10 50 L30 60 L30 140 L110 140 L110 60 L130 50 L100 20 L80 30 Q70 40 60 30 Z" stroke="#c8b89a" stroke-width="1.5" fill="rgba(200,184,154,0.05)"/>
+            <text x="70" y="80" font-family="Bebas Neue" font-size="11" fill="rgba(200,184,154,0.3)" text-anchor="middle">FÉ</text>
+            <text x="70" y="105" font-family="Bebas Neue" font-size="30" fill="rgba(200,184,154,0.2)" text-anchor="middle">SOMA</text>
+            <text x="70" y="125" font-family="Bebas Neue" font-size="11" fill="rgba(122,30,46,0.4)" text-anchor="middle">COLLECTIVE</text>
+          </svg>
+          <div class="product-overlay"><span>VER PRODUTO</span></div>
+        </div>
+        <div class="product-info">
+          <div class="colecao-badge">Bestseller</div>
+          <div class="product-name">Camiseta Fé Oversized</div>
+          <div class="product-meta">
+            <span class="product-price">R$ 139,90</span>
+            <div class="product-sizes">
+              <span class="size-tag">P</span><span class="size-tag">M</span>
+              <span class="size-tag">G</span><span class="size-tag">GG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE -->
+<section class="lifestyle" id="lifestyle">
+  <div class="lifestyle-inner">
+    <div class="fade-up">
+      <div class="section-label">Lifestyle</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,6vw,6rem); color:var(--white); letter-spacing:0.03em; line-height:0.92;">
+        A RUA É <span style="color:var(--wine-light);">NOSSA</span>
+      </h2>
+    </div>
+    <div class="lifestyle-grid fade-up">
+      <div class="ls-item" style="min-height:500px;">
+        <div class="ls-item-bg">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(122,30,46,0.04) 0,rgba(122,30,46,0.04) 1px,transparent 1px,transparent 18px);"></div>
+          <div class="ls-court-lines"></div>
+          <div class="ls-big-text">GRU<br>SP</div>
+        </div>
+        <div class="ls-label">Quadra — Guarulhos</div>
+      </div>
+      <div class="ls-item" style="min-height:240px;">
+        <div class="ls-item-bg">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(200,184,154,0.03) 0,rgba(200,184,154,0.03) 1px,transparent 1px,transparent 30px);"></div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(122,30,46,0.2);position:relative;z-index:1;">7</div>
+        </div>
+        <div class="ls-label">Rua — SP</div>
+      </div>
+      <div class="ls-item" style="min-height:240px;">
+        <div class="ls-item-bg">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(122,30,46,0.05) 0,rgba(122,30,46,0.05) 1px,transparent 1px,transparent 15px);"></div>
+          <div style="font-family:'Permanent Marker',cursive;font-size:1.8rem;color:rgba(200,184,154,0.15);text-align:center;padding:2rem;position:relative;z-index:1;line-height:1.4;">FÉ<br>NAS<br>RUAS</div>
+        </div>
+        <div class="ls-label">Muro — GRU</div>
+      </div>
+      <div class="ls-item" style="min-height:240px;">
+        <div class="ls-item-bg">
+          <div style="position:absolute;inset:0;background:rgba(122,30,46,0.08);"></div>
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;opacity:0.3;">
+            <circle cx="50" cy="50" r="48" stroke="#c8b89a" stroke-width="1"/>
+            <circle cx="50" cy="50" r="30" stroke="#c8b89a" stroke-width="0.5"/>
+            <line x1="2" y1="50" x2="98" y2="50" stroke="#c8b89a" stroke-width="0.5"/>
+            <line x1="50" y1="2" x2="50" y2="98" stroke="#c8b89a" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <div class="ls-label">Estilo — Coletivo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social-section">
+  <div class="fade-up">
+    <div class="section-label" style="justify-content:center; margin-bottom:1rem;">Nos siga</div>
+    <h2>SIGA A SOMA</h2>
+    <p class="social-sub">Acompanhe o movimento nas redes sociais</p>
+    <div class="social-icons">
+      <a href="#" class="social-link">
+        <div class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <span class="social-name">Instagram</span>
+      </a>
+      <a href="#" class="social-link">
+        <div class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.09a8.16 8.16 0 004.77 1.52V7.15a4.85 4.85 0 01-1-.46z"/>
+          </svg>
+        </div>
+        <span class="social-name">TikTok</span>
+      </a>
+      <a href="#" class="social-link">
+        <div class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 15.998a9.228 9.228 0 01-2.505 1.21 9.17 9.17 0 01-2.784.427c-5.036 0-9.13-4.094-9.13-9.13 0-5.035 4.094-9.13 9.13-9.13 5.035 0 9.13 4.095 9.13 9.13a9.13 9.13 0 01-3.841 7.493z"/>
+          </svg>
+        </div>
+        <span class="social-name">WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">SOMA<span>.</span></div>
+      <p class="footer-tagline">Fé que veste. Rua que inspira. Propósito que une. Nascida em Guarulhos para o mundo.</p>
+    </div>
+    <div class="footer-col">
+      <h4>A Marca</h4>
+      <ul>
+        <li><a href="#quem-somos">Quem Somos</a></li>
+        <li><a href="#proposito">Propósito</a></li>
+        <li><a href="#lifestyle">Lifestyle</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Loja</h4>
+      <ul>
+        <li><a href="#colecao">Nova Coleção</a></li>
+        <li><a href="#colecao">Camisetas</a></li>
+        <li><a href="#colecao">Acessórios</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 SOMA Collective. Guarulhos – SP. Todos os direitos reservados.</span>
+    <span class="footer-verse">"Eu vim para que tenham vida." — Jo 10:10</span>
+  </div>
+</footer>
+
+<script>
+  // Fade-up observer
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Hamburger toggle
+  document.getElementById('hamburger').addEventListener('click', function() {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:#0a0a0a;padding:1.5rem 2rem;gap:1.2rem;border-bottom:1px solid rgba(200,184,154,0.1);';
+    }
+  });
+
+  // Marquee clone for seamless loop
+  const track = document.getElementById('marquee');
+  track.innerHTML += track.innerHTML;
+</script>
+</body>
+</html>
